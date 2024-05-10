@@ -13,5 +13,6 @@ namespace api.Dtos.Account
 
         public string Token { get; set; }
 
+        public object TokenInfo { get; set; }
     }
 }

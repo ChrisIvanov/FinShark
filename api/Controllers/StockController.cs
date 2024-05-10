@@ -21,7 +21,7 @@ namespace api.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "User")]
+        [Authorize]
         public async Task<IActionResult> GetAll([FromQuery] QueryObject query)
         {
             if (!ModelState.IsValid)

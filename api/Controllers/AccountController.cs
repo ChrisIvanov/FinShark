@@ -26,7 +26,7 @@ namespace api.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> Login([FromBody] LoginDto loginDto)
+        public async Task<IActionResult> Login(LoginDto loginDto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);

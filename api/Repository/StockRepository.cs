@@ -57,36 +57,42 @@ namespace api.Repository
                 .Select(s => s.ToStockDto())
                 .FirstOrDefaultAsync();
 
-        public async Task<StockDto> CreateAsync(CreateStockRequestDto stockDto)
-        {
-            var stockModel = stockDto.ToStockFromCreateDTO();
-            await _context.Stocks.AddAsync(stockModel);
-            await _context.SaveChangesAsync();
-
-            return stockModel.ToStockDto();
-        }
-
-        public async Task<Tuple<int, UpdateStockRequestDto?>> UpdateAsync(int id, UpdateStockRequestDto updateDto)
-        {
-            var result = await _context.Stocks
-                .Where(x => x.Id == id)
-                .ExecuteUpdateAsync(x => x
-                .SetProperty(s => s.Symbol, updateDto.Symbol)
-                .SetProperty(s => s.CompanyName, updateDto.CompanyName)
-                .SetProperty(s => s.Industry, updateDto.Industry)
-                .SetProperty(s => s.Purchase, updateDto.Purchase)
-                .SetProperty(s => s.LastDiv, updateDto.LastDiv)
-                .SetProperty(s => s.MarketCap, updateDto.MarketCap));
-
-            return new(result, updateDto);
-        }
-
-        public async Task<int> DeleteAsync(int id)
+        public async Task<StockDto?> GetBySymbolAsync(string symbol)
             => await _context.Stocks
-                .Where(x => x.Id == id)
-                .ExecuteDeleteAsync();
+                .Where(s => s.Symbol == symbol)
+                .Select(s => s.ToStockDto())
+                .FirstOrDefaultAsync();
 
-        public async Task<bool> StockExists(int id)
-            => await _context.Stocks.AnyAsync(x => x.Id == id);
+    public async Task<StockDto> CreateAsync(CreateStockRequestDto stockDto)
+    {
+        var stockModel = stockDto.ToStockFromCreateDTO();
+        await _context.Stocks.AddAsync(stockModel);
+        await _context.SaveChangesAsync();
+
+        return stockModel.ToStockDto();
     }
+
+    public async Task<Tuple<int, UpdateStockRequestDto?>> UpdateAsync(int id, UpdateStockRequestDto updateDto)
+    {
+        var result = await _context.Stocks
+            .Where(x => x.Id == id)
+            .ExecuteUpdateAsync(x => x
+            .SetProperty(s => s.Symbol, updateDto.Symbol)
+            .SetProperty(s => s.CompanyName, updateDto.CompanyName)
+            .SetProperty(s => s.Industry, updateDto.Industry)
+            .SetProperty(s => s.Purchase, updateDto.Purchase)
+            .SetProperty(s => s.LastDiv, updateDto.LastDiv)
+            .SetProperty(s => s.MarketCap, updateDto.MarketCap));
+
+        return new(result, updateDto);
+    }
+
+    public async Task<int> DeleteAsync(int id)
+        => await _context.Stocks
+            .Where(x => x.Id == id)
+            .ExecuteDeleteAsync();
+
+    public async Task<bool> StockExists(int id)
+        => await _context.Stocks.AnyAsync(x => x.Id == id);
+}
 }

@@ -25,7 +25,6 @@ D:\Code\FinShark\api\obj\Debug\net8.0\staticwebassets\msbuild.buildMultiTargetin
 D:\Code\FinShark\api\obj\Debug\net8.0\staticwebassets\msbuild.buildTransitive.api.props
 D:\Code\FinShark\api\obj\Debug\net8.0\staticwebassets.pack.json
 D:\Code\FinShark\api\obj\Debug\net8.0\scopedcss\bundle\api.styles.css
-D:\Code\FinShark\api\obj\Debug\net8.0\api.csproj.CopyComplete
 D:\Code\FinShark\api\obj\Debug\net8.0\api.dll
 D:\Code\FinShark\api\obj\Debug\net8.0\refint\api.dll
 D:\Code\FinShark\api\obj\Debug\net8.0\api.pdb
@@ -146,3 +145,5 @@ D:\Code\FinShark\api\bin\Debug\net8.0\Microsoft.AspNetCore.Identity.EntityFramew
 D:\Code\FinShark\api\bin\Debug\net8.0\Microsoft.Extensions.Identity.Core.dll
 D:\Code\FinShark\api\bin\Debug\net8.0\Microsoft.Extensions.Identity.Stores.dll
 D:\Code\FinShark\api\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
+D:\Code\FinShark\api\obj\Debug\net8.0\api.sourcelink.json
+D:\Code\FinShark\api\obj\Debug\net8.0\api.csproj.Up2Date

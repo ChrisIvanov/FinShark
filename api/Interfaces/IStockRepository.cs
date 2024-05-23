@@ -10,6 +10,9 @@ namespace api.Interfaces
 
         Task<StockDto?> GetByIdAsync(int id);
 
+        Task<StockDto?> GetBySymbolAsync(string symbol);
+
+
         Task<StockDto> CreateAsync(CreateStockRequestDto stockModel);
 
         Task<Tuple<int, UpdateStockRequestDto?>> UpdateAsync(int id, UpdateStockRequestDto stockDto);

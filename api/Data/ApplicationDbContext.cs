@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Threading.Tasks;
 using api.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -22,6 +17,8 @@ namespace api.Data
 
         public DbSet<Comment> Comments { get; set; }
 
+        public DbSet<Portfolio> Portfolios { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
@@ -39,6 +36,21 @@ namespace api.Data
                     NormalizedName = "USER"
                 },
             };
+
+            builder.Entity<Portfolio>(x => 
+            {
+                x.HasKey(p => new { p.AppUserId, p.StockId } );
+
+                x.HasOne(u => u.AppUser)
+                .WithMany(x => x.Portfolios)
+                .HasForeignKey(p => p.AppUserId);
+
+                x.HasOne(u => u.Stock)
+                .WithMany(x => x.Portfolios)
+                .HasForeignKey(p => p.StockId);
+
+                x.ToTable("Portfolios");
+            });
 
             builder.Entity<IdentityRole>().HasData(roles);
         }

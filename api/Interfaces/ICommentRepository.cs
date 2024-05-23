@@ -8,7 +8,7 @@ namespace api.Interfaces
 
         Task<CommentDto?> GetByIdAsync(int id);
 
-        Task<Tuple<int, CommentDto>?> CreateAsync(int stockId, CreateCommentDto createModel);
+        Task<Tuple<int, CommentDto>?> CreateAsync(int stockId, CreateCommentDto createModel, string appUserId);
 
         Task<Tuple<int, UpdateCommentDto>> UpdateAsync(int id, UpdateCommentDto updateDto);
 

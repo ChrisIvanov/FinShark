@@ -2,6 +2,9 @@ using api.Data;
 using api.Dtos.Comment;
 using api.Interfaces;
 using api.Mappers;
+using api.Models;
+using api.Extensions;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace api.Repository
@@ -21,6 +24,7 @@ namespace api.Repository
         public async Task<List<CommentDto>> GetAllAsync()
         {
             return await _context.Comments
+                .Include(a => a.AppUser)
                 .Select(x => x.ToCommentDto())
                 .AsNoTracking()
                 .ToListAsync();
@@ -29,16 +33,20 @@ namespace api.Repository
         public async Task<CommentDto?> GetByIdAsync(int id)
         {
             return await _context.Comments
+                .Include(a => a.AppUser)
                 .Where(x => x.Id == id)
                 .Select(x => x.ToCommentDto())
                 .AsNoTracking()
                 .FirstOrDefaultAsync();
         }
 
-        public async Task<Tuple<int, CommentDto>?> CreateAsync(int stockId, CreateCommentDto createModel)
-        { 
+        public async Task<Tuple<int, CommentDto>?> CreateAsync(int stockId, CreateCommentDto createModel, string appUserId)
+        {
             var comment = createModel.ToCommentFromCreateDto(stockId);
+            comment.AppUserId = appUserId;
+
             await _context.Comments.AddAsync(comment);
+
             var result = await _context.SaveChangesAsync();
 
             return new(result, comment.ToCommentDto());

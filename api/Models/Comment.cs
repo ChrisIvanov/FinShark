@@ -1,9 +1,4 @@
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Reflection.Metadata;
-using System.Threading.Tasks;
 
 namespace api.Models
 {
@@ -21,5 +16,9 @@ namespace api.Models
         public int? StockId { get; set; }
 
         public Stock? Stock { get; set; }
+
+        public string AppUserId { get; set; }
+
+        public AppUser AppUser { get; set; }
     }
 }
